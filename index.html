@@ -163,13 +163,23 @@
     <div class="max-w-3xl mx-auto px-6 py-24">
       <h2 class="text-4xl font-bold">Contact Applied PE</h2>
       <p class="mt-4 text-slate-400">Tell us about your facility and utility spend. We’ll let you know if a predominant use study makes sense.</p>
-      <form class="mt-10 grid gap-4" action="mailto:Jake@appliedpe.com,appliedpetx@gmail.com" method="POST" enctype="text/plain">
-        <input name="Name" class="p-4 rounded-xl bg-slate-900 border border-slate-700" placeholder="Name" required />
-        <input name="Email" type="email" class="p-4 rounded-xl bg-slate-900 border border-slate-700" placeholder="Email" required />
-        <input name="Company" class="p-4 rounded-xl bg-slate-900 border border-slate-700" placeholder="Company" />
-        <textarea name="Description" class="p-4 rounded-xl bg-slate-900 border border-slate-700" rows="4" placeholder="Brief description of your operation"></textarea>
-        <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-semibold px-6 py-3 rounded-xl">Submit</button>
-      </form>
+      <form class="mt-10 grid gap-4" 
+      action="https://formsubmit.co/Appliedpetx@gmail.com" 
+      method="POST">
+
+  <input name="Name" class="p-4 rounded-xl bg-slate-900 border border-slate-700" placeholder="Name" required />
+  <input name="Email" type="email" class="p-4 rounded-xl bg-slate-900 border border-slate-700" placeholder="Email" required />
+  <input name="Company" class="p-4 rounded-xl bg-slate-900 border border-slate-700" placeholder="Company" />
+  <textarea name="Description" class="p-4 rounded-xl bg-slate-900 border border-slate-700" rows="4" placeholder="Brief description of your operation"></textarea>
+
+  <!-- Anti-spam -->
+  <input type="text" name="_gotcha" style="display:none" />
+
+  <!-- Optional: redirect after submit -->
+  <!-- <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html"> -->
+
+  <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-semibold px-6 py-3 rounded-xl">Submit</button>
+</form>
     </div>
   </section>
 
