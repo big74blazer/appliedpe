@@ -232,9 +232,7 @@ Our Services
     <div class="max-w-3xl mx-auto px-6 py-24">
       <h2 class="text-4xl font-bold">Contact Applied PE</h2>
       <p class="mt-4 text-slate-400">Tell us about your facility and utility spend. We’ll let you know if a predominant use study makes sense.</p>
-     <form class="mt-10 grid gap-4" 
-      action="https://formsubmit.co/Appliedpetx@gmail.com" 
-      method="POST">
+     <form id="contactForm" class="mt-10 grid gap-4" action="https://formsubmit.co/Appliedpetx@gmail.com" method="POST">
 
   <input name="Name" class="p-4 rounded-xl bg-slate-900 border border-slate-700" placeholder="Name" required />
   
@@ -270,6 +268,39 @@ window.addEventListener("scroll", () => {
 header.classList.toggle("shrink", window.scrollY > 80);
 });
 </script>
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Stop normal submission
 
+    const form = this;
+    const formData = new FormData(form);
+
+    fetch('https://formsubmit.co/ajax/Appliedpetx@gmail.com', {  // Note: use /ajax/ endpoint
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Hide form, show success message
+        form.innerHTML = `
+          <div class="text-center py-12">
+            <h3 class="text-3xl font-bold text-emerald-400 mb-4">Thank You!</h3>
+            <p class="text-xl text-slate-300">
+              Your inquiry has been submitted successfully.<br>
+              We'll get back to you soon about potential utility tax savings.
+            </p>
+          </div>
+        `;
+      } else {
+        alert('Something went wrong: ' + (data.message || 'Please try again.'));
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Submission failed. Please check your connection and try again.');
+    });
+  });
+</script>
 </body>
 </html>
