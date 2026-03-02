@@ -12,20 +12,31 @@
 <!-- Logo behavior (scoped, safe) -->
 <style>
 .ape-header {
-position: sticky;
-top: 0;
-z-index: 50;
-background: transparent;
-transition: background 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  /* GLASS EFFECT */
+  background: rgba(2, 6, 23, 0.25); /* slate-950 w/ opacity */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  transition:
+    background 0.3s ease,
+    backdrop-filter 0.3s ease;
 }
 
 .ape-logo {
-height: 11rem;
-transition: height 0.3s ease;
+  height: 11rem;
+  transition: height 0.3s ease;
+}
+
+.ape-header.shrink {
+  background: rgba(2, 6, 23, 0.75); /* darker when shrunk */
 }
 
 .ape-header.shrink .ape-logo {
-height: 6rem;
+  height: 6rem;
 }
 </style>
 </head>
