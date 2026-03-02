@@ -288,26 +288,35 @@ fetch('https://formsubmit.co/ajax/Appliedpetx@gmail.com', {
       method: 'POST',
       body: formData
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok: ' + response.status);
-      }
-      return response.json();
-    })
-    .then(data => {
-      // We got a JSON response → treat as success (email usually sends anyway)
-      console.log('FormSubmit response:', data); // optional: check console for debugging
 
-      form.innerHTML = `
-        <div class="text-center py-12">
-          <h3 class="text-3xl font-bold text-emerald-400 mb-4">Thank You!</h3>
-          <p class="text-xl text-slate-300">
-            Your inquiry has been submitted successfully.<br>
-            We'll get back to you soon about potential utility tax savings.
-          </p>
-        </div>
-      `;
-      grecaptcha.reset();
+
+    .then(response => response.json())
+
+    .then(data => {
+
+      if (data.success) {
+
+        form.innerHTML = `
+
+          <div class="text-center py-12">
+
+            <h3 class="text-3xl font-bold text-emerald-400 mb-4">Thank You!</h3>
+
+            <p class="text-xl text-slate-300">
+
+              Your inquiry has been submitted successfully.<br>
+
+              We'll get back to you soon about potential utility tax savings.
+
+            </p>
+
+          </div>
+
+        `;
+
+        // Optional: reset reCAPTCHA for future submits if you keep form visible
+
+        grecaptcha.reset();
     })
     .catch(error => {
       console.error('Submission error:', error);
