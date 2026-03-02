@@ -235,7 +235,7 @@ Our Services
       <h2 class="text-4xl font-bold">Contact Applied PE</h2>
       <p class="mt-4 text-slate-400">Tell us about your facility and utility spend. We’ll let you know if a predominant use study makes sense.</p>
      <form id="contactForm" class="mt-10 grid gap-4" action="https://formsubmit.co/Appliedpetx@gmail.com" method="POST">
-<input type="hidden" name="_captcha" value="false">
+
   <input name="Name" class="p-4 rounded-xl bg-slate-900 border border-slate-700" placeholder="Name" required />
   
   <!-- New: Phone field, placed before Email -->
@@ -284,44 +284,33 @@ header.classList.toggle("shrink", window.scrollY > 80);
     // Optional: add the token as a field if you want (not required for spam protection here)
     // formData.append('g-recaptcha-response', recaptchaResponse);
 
-fetch('https://formsubmit.co/ajax/Appliedpetx@gmail.com', {
+    fetch('https://formsubmit.co/ajax/Appliedpetx@gmail.com', {
       method: 'POST',
       body: formData
     })
-
-
     .then(response => response.json())
-
     .then(data => {
-
       if (data.success) {
-
         form.innerHTML = `
-
           <div class="text-center py-12">
-
             <h3 class="text-3xl font-bold text-emerald-400 mb-4">Thank You!</h3>
-
             <p class="text-xl text-slate-300">
-
               Your inquiry has been submitted successfully.<br>
-
               We'll get back to you soon about potential utility tax savings.
-
             </p>
-
           </div>
-
         `;
-
         // Optional: reset reCAPTCHA for future submits if you keep form visible
-
         grecaptcha.reset();
+      } else {
+        alert('Submission issue: ' + (data.message || 'Please try again.'));
+      }
     })
     .catch(error => {
-      console.error('Submission error:', error);
-      alert('Submission failed. Please check your connection and try again.');
+      console.error('Error:', error);
+      alert('Submission failed. Please try again.');
     });
+  });
 </script>
 </body>
 </html>
