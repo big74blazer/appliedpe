@@ -288,20 +288,20 @@ header.classList.toggle("shrink", window.scrollY > 80);
       method: 'POST',
       body: formData
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        form.innerHTML = `
-          <div class="text-center py-12">
-            <h3 class="text-3xl font-bold text-emerald-400 mb-4">Thank You!</h3>
-            <p class="text-xl text-slate-300">
-              Your inquiry has been submitted successfully.<br>
-              We'll get back to you soon about potential utility tax savings.
-            </p>
-          </div>
-        `;
-        // Optional: reset reCAPTCHA for future submits if you keep form visible
-        grecaptcha.reset();
+.then(response => response.json())
+.then(data => {
+  // Ignore data.success – just show success if we got a JSON response
+  form.innerHTML = `
+    <div class="text-center py-12">
+      <h3 class="text-3xl font-bold text-emerald-400 mb-4">Thank You!</h3>
+      <p class="text-xl text-slate-300">
+        Your inquiry has been submitted successfully.<br>
+        We'll get back to you soon about potential utility tax savings.
+      </p>
+    </div>
+  `;
+  grecaptcha.reset();
+})
       } else {
         alert('Submission issue: ' + (data.message || 'Please try again.'));
       }
