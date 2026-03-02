@@ -27,8 +27,12 @@
 }
 
 .ape-logo {
-  height: 11rem;
-  transition: height 0.3s ease;
+  max-height: 11rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: max-height 0.3s ease;
+  display: block;
 }
 
 .ape-header.shrink {
@@ -36,7 +40,7 @@
 }
 
 .ape-header.shrink .ape-logo {
-  height: 6rem;
+  max-height: 6rem;
 }
 </style>
 </head>
