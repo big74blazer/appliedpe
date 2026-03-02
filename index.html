@@ -284,33 +284,35 @@ header.classList.toggle("shrink", window.scrollY > 80);
     // Optional: add the token as a field if you want (not required for spam protection here)
     // formData.append('g-recaptcha-response', recaptchaResponse);
 
-    fetch('https://formsubmit.co/ajax/Appliedpetx@gmail.com', {
+fetch('https://formsubmit.co/ajax/Appliedpetx@gmail.com', {
       method: 'POST',
       body: formData
     })
-.then(response => response.json())
-.then(data => {
-  // Ignore data.success – just show success if we got a JSON response
-  form.innerHTML = `
-    <div class="text-center py-12">
-      <h3 class="text-3xl font-bold text-emerald-400 mb-4">Thank You!</h3>
-      <p class="text-xl text-slate-300">
-        Your inquiry has been submitted successfully.<br>
-        We'll get back to you soon about potential utility tax savings.
-      </p>
-    </div>
-  `;
-  grecaptcha.reset();
-})
-      } else {
-        alert('Submission issue: ' + (data.message || 'Please try again.'));
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok: ' + response.status);
       }
+      return response.json();
+    })
+    .then(data => {
+      // We got a JSON response → treat as success (email usually sends anyway)
+      console.log('FormSubmit response:', data); // optional: check console for debugging
+
+      form.innerHTML = `
+        <div class="text-center py-12">
+          <h3 class="text-3xl font-bold text-emerald-400 mb-4">Thank You!</h3>
+          <p class="text-xl text-slate-300">
+            Your inquiry has been submitted successfully.<br>
+            We'll get back to you soon about potential utility tax savings.
+          </p>
+        </div>
+      `;
+      grecaptcha.reset();
     })
     .catch(error => {
-      console.error('Error:', error);
-      alert('Submission failed. Please try again.');
+      console.error('Submission error:', error);
+      alert('Submission failed. Please check your connection and try again.');
     });
-  });
 </script>
 </body>
 </html>
