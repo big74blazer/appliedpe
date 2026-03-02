@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- reCAPTCHA v2 script -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Applied Process Engineering | Texas Utility Exemption & Industrial Engineering</title>
@@ -245,7 +247,7 @@ Our Services
 
   <!-- Optional: redirect after submit (uncomment and customize if you have a thank-you page) -->
   <!-- <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html"> -->
-
+<div class="g-recaptcha" data-sitekey="6Lchf30sAAAAAGR6NvwzsyeDA7guh0c8z6cfAE-8"></div>
   <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-semibold px-6 py-3 rounded-xl">Submit</button>
 </form>
     </div>
@@ -267,19 +269,28 @@ header.classList.toggle("shrink", window.scrollY > 80);
 </script>
 <script>
   document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Stop normal submission
+    e.preventDefault();
+
+    // Check if reCAPTCHA is solved
+    const recaptchaResponse = grecaptcha.getResponse();
+    if (recaptchaResponse.length === 0) {
+      alert('Please complete the CAPTCHA to prove you are not a robot.');
+      return; // Stop submission
+    }
 
     const form = this;
     const formData = new FormData(form);
 
-    fetch('https://formsubmit.co/ajax/Appliedpetx@gmail.com', {  // Note: use /ajax/ endpoint
+    // Optional: add the token as a field if you want (not required for spam protection here)
+    // formData.append('g-recaptcha-response', recaptchaResponse);
+
+    fetch('https://formsubmit.co/ajax/Appliedpetx@gmail.com', {
       method: 'POST',
       body: formData
     })
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        // Hide form, show success message
         form.innerHTML = `
           <div class="text-center py-12">
             <h3 class="text-3xl font-bold text-emerald-400 mb-4">Thank You!</h3>
@@ -289,13 +300,15 @@ header.classList.toggle("shrink", window.scrollY > 80);
             </p>
           </div>
         `;
+        // Optional: reset reCAPTCHA for future submits if you keep form visible
+        grecaptcha.reset();
       } else {
-        alert('Something went wrong: ' + (data.message || 'Please try again.'));
+        alert('Submission issue: ' + (data.message || 'Please try again.'));
       }
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('Submission failed. Please check your connection and try again.');
+      alert('Submission failed. Please try again.');
     });
   });
 </script>
